@@ -11,6 +11,9 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Establish our different possible states
+ */
 sealed interface FetchUiState {
     data class Success(val data: Map<Int, List<FetchModel>>) : FetchUiState
     data object Error : FetchUiState
@@ -21,10 +24,18 @@ class FetchViewModel : ViewModel() {
     var fetchUiState: FetchUiState by mutableStateOf(FetchUiState.Loading)
         private set
 
+    /**
+     * Make a call to fetch the JSON file when our view model is created
+     */
     init {
         getItems()
     }
 
+    /**
+     * Use the retrofit service to make the GET request and then
+     * process the result by filtering names that are blank or null,
+     * grouping by listId, and sorting by listId and then name
+     */
     private fun getItems() {
         viewModelScope.launch {
             fetchUiState = FetchUiState.Loading

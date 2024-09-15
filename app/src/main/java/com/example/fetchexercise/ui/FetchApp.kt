@@ -1,7 +1,6 @@
 package com.example.fetchexercise.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,8 +19,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 fun FetchApp(modifier: Modifier = Modifier) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(color = Color(0xFFFBA919), darkIcons = false)
-
-    val isDarkMode = isSystemInDarkTheme()
 
     Column(modifier = modifier) {
         val fetchViewModel: FetchViewModel = viewModel()

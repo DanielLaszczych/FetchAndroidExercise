@@ -26,6 +26,10 @@ import androidx.compose.ui.unit.dp
 import com.example.fetchexercise.model.FetchModel
 import com.example.fetchexercise.ui.viewmodel.FetchUiState
 
+/**
+ * To main screen of our application that will dynamically render
+ * a screen based on our fetch state
+ */
 @Composable
 fun HomeScreen(
     fetchUiState: FetchUiState, modifier: Modifier = Modifier
@@ -37,6 +41,9 @@ fun HomeScreen(
     }
 }
 
+/**
+ * Screen that will be displayed when we are waiting for our fetch request
+ */
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {
     Text(
@@ -47,6 +54,10 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
     )
 }
 
+/**
+ * Screen that will display our fetched results by using lazy columns to
+ * save resources by only displaying what is visible on the screen
+ */
 @Composable
 fun ResultScreen(data: Map<Int, List<FetchModel>>, modifier: Modifier = Modifier) {
     val isDarkMode = isSystemInDarkTheme()
@@ -108,6 +119,10 @@ fun ResultScreen(data: Map<Int, List<FetchModel>>, modifier: Modifier = Modifier
     }
 }
 
+/**
+ * Screen that will be displayed when there was error with our request
+ * such as lack of connection
+ */
 @Composable
 fun ErrorScreen(modifier: Modifier = Modifier) {
     Text(
