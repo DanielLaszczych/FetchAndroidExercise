@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -19,9 +20,10 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 fun FetchApp(modifier: Modifier = Modifier) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(color = Color(0xFFFBA919), darkIcons = false)
+    val fetchViewModel: FetchViewModel = viewModel(factory = FetchViewModel.Factory)
+    val fetchUiState = fetchViewModel.fetchUiState.collectAsState().value
 
     Column(modifier = modifier) {
-        val fetchViewModel: FetchViewModel = viewModel()
         Text(
             text = "Fetch Exercise",
             style = MaterialTheme.typography.headlineMedium,
@@ -33,6 +35,6 @@ fun FetchApp(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .padding(10.dp)
         )
-        HomeScreen(fetchUiState = fetchViewModel.fetchUiState)
+        HomeScreen(fetchUiState, fetchViewModel::likeItem)
     }
 }
